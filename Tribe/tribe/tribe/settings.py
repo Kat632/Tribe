@@ -100,6 +100,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'tribe.wsgi.application'
 
+CSRF_TRUSTED_ORIGINS = ['https://8000-kat632-tribe-w1u7sx5ifvj.ws-eu84.gitpod.io']
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
