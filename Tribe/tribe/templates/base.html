@@ -1,44 +1,334 @@
-<title>{% block title %} {% endblock %}</title>
-      <style>
-          {% block css %} {% endblock %}
-    </style>
-  </head>
-  <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-  <a class="navbar-brand" href="/">Discussion Forum</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
- 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
-      </li>
-      {% if user.is_authenticated %}
-<ul class="navbar-nav mr-2">
-<li class="nav-item dropdown">
-<a class="nav-link dropdown-toggle" href='#' id="navbarDropdown" role="button" data-toggle="dropdown"> Welcome {{request.user}}</a>
-<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="/logout">Logout</a>
- 
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+
+<head>
+
+    {% block meta %}
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Meta tags for improved SEO using search keywords and descriptions -->
+    <meta name="description"
+        content="Visit Watch You Want today - individual watches for individual people.  Specialists in Casio, Skagen, Fossil and restored retro timepieces.">
+    <meta name="keywords"
+        content="watches for her, watches for him, watches for kids, unisex watches, watches for men, watches for women, ladies watches, mens watches, watch gifts for men, watch gifts for women, first watch for child, watch lover gifts, restored watches, restored vintage watches, restored retro watches, restored casio watches, vintage watch restoration, watch restoration">
+    <meta name="author" content="Katherine Biggs">
+    <meta name="page-topic" content="Wrist watches">
+    <meta name="page-type" content="Watch store">
+    <meta name="robots" content="index, follow">
+    {% endblock %}
+
+    {% block extra_meta %}
+    {% endblock %}
+
+    {% block corecss %}
+    <!-- Bootstrap 4 -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <!-- Favicon necessaries-->
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ MEDIA_URL }}apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ MEDIA_URL }}favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ MEDIA_URL }}favicon-16x16.png">
+    <!-- My css-->
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    {% endblock %}
+
+    {% block extra_css %}
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+        integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Mailchimp -->
+    <link href="//cdn-images.mailchimp.com/embedcode/classic-10_7_dtp.css" rel="stylesheet" type="text/css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;500;600;700;800;900&display=swap" rel="stylesheet"> 
+    {% endblock %}
+
+    {% block corejs %}
+    <!-- Fontawesome -->
+    <script src="https://kit.fontawesome.com/b3341ec0dd.js" crossorigin="anonymous"></script>
+    <!-- jquery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+    </script>
+    <!-- Bootstrap JavaScript -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
+    </script>
+    <!-- Stripe -->
+    <script src="https://js.stripe.com/v3/"></script>
+    {% endblock %}
+
+    {% block extra_js %}
+    {% endblock %}
+
+    <title>Watch You Want? {% block extra_title %}{% endblock %}</title>
+</head>
+
+<body>
+    <!-- Header content -->
+    <header class="container-fluid fixed-top">
+        <div id="topnav" class="row bg-white pt-lg-0 d-none d-lg-flex">
+            <div class="col-xl-3 col-lg-2 my-auto py-1 py-lg-0 text-center text-lg-left">
+                <!-- Main logo -->
+                <div class="header-logo">
+                    <a href="{% url 'home' %}" class="nav-link main-logo-link">
+                        <img src="{% static 'media/watchyouwant_logo_new.png' %}" alt="Watch You Want logo"
+                            style="height:115px;">
+                    </a>
+                </div>
+            </div>
+            <!-- Search form -->
+            <div class="col-xl-6 col-lg-7 my-auto py-1 py-lg-0 search-form">
+                <form method="GET" action="">
+                    <div class="input-group w-100">
+                        <input type="text" name="q" placeholder="Search our site">
+                        <button class="site-btn" type="submit">
+                            <span class="icon">
+                                <i class="fas fa-search"></i>
+                            </span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+            <!-- Navigation dropdowns -->
+            <div class="col-lg-3 my-auto py-1 py-lg-0 text-right my-0">
+                <div class="row bg-white right-list">
+                    <ul class="header-right-widgets list-inline list-unstyled">
+                        <li class="list-inline-item dropdown">
+                            <a class="text-black nav-link" href="#" id="user-options" data-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false">
+                                <div class="text-center">
+                                    <div><i class="fas fa-user fa-lg"></i></div>
+                                    <p class="my-0">My Account</p>
+                                </div>
+                            </a>
+                            <!-- User account dropdown -->
+                            <div class="dropdown-menu border-0" aria-labelledby="user-options">
+                                {% if request.user.is_authenticated %}
+                                {% if request.user.is_superuser %}
+                                <a href="" class="dropdown-item">Product Management</a>
+                                {% endif %}
+                                <a href="" class="dropdown-item">My Account</a>
+                                <a href="{% url 'account_logout' %}" class="dropdown-item">Logout</a>
+                                {% else %}
+                                <a href="{% url 'account_signup' %}" class="dropdown-item">Register</a>
+                                <a href="{% url 'account_login' %}" class="dropdown-item">Login</a>
+                                {% endif %}
+                            </div>
+                        </li>
+                        <!-- Access to bag -->
+                        <li class="list-inline-item">
+                            <a class="{% if grand_total %}bag-info font-weight-bold{% else %}text-black{% endif %} nav-link"
+                                href="">
+                                <div class="text-center">
+                                    <div><i class="fas fa-shopping-bag fa-lg"></i></div>
+                                    <p class="my-0">
+                                        {% if grand_total %}
+                                        £{{ grand_total|floatformat:2 }}
+                                        {% else %}
+                                        £0.00
+                                        {% endif %}
+                                    </p>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </div>
-      </li>      
-{% else %}
-      <li class="nav-item">
-        <a class="nav-link" href="/register">Register</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/login">Login</a>
-      </li>
-      {% endif %}
- 
-      <li class="nav-item">
-        <a class="nav-link" href="/myprofile">Profile</a>
-      </li>
-    </ul>
-  </div>
-</nav>
-<br>
+        <!-- Navigation headers -->
+        <div class="row bg-white">
+            <nav class="navbar navbar-expand-lg navbar-light w-100">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-nav"
+                    aria-controls="main-nav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                {% include 'includes/mobile-top-header.html' %}
+                {% include 'includes/main-nav.html' %}
+            </nav>
+        </div>
+        <!-- Delivery banner -->
+        <div id="delivery-banner" class="row text-center">
+            <div class="col bg-black text-white">
+                <h4 class="logo-font my-1">Free delivery on orders over £{{ free_delivery_threshold }}!</h4>
+            </div>
+        </div>
+    </header>
+    <!-- Toasts -->
+    {% if messages %}
+    <div class="message-container">
+        {% for message in messages %}
+        {% with message.level as level %}
+        {% if level == 40 %}
+        {% include 'includes/toasts/toast_error.html' %}
+        {% elif level == 30 %}
+        {% include 'includes/toasts/toast_warning.html' %}
+        {% elif level == 25 %}
+        {% include 'includes/toasts/toast_success.html' %}
+        {% else %}
+        {% include 'includes/toasts/toast_info.html' %}
+        {% endif %}
+        {% endwith %}
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    {% block page_header %}
+    {% endblock %}
+
+    {% block content %}
+    {% endblock %}
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <!-- Footer logo -->
+                <div class="col-lg-4 col-md-6 col-sm-7">
+                    <div class="footer-about">
+                        <div class="footer-logo">
+                            <a href="{% url 'home' %}" class="nav-link main-logo-link">
+                                <img src="{% static 'media/watchyouwant_logo_new.png' %}" alt="Watch You Want logo"
+                                    height="125" class="d-inline-block align-text-top">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Footer menu left -->
+                <div class="col-lg-2 col-md-3 col-sm-5">
+                    <div class="footer-widget">
+                        <h6>Quick Links</h6>
+                        <ul>
+                            <li>
+                                <a href="">Blog</a>
+                            </li>
+                            <li>
+                                <a href="">Terms & Conditions</a>
+                            </li>
+                            <li>
+                                <a href="">Privacy Policy</a>
+                            </li>
+                            <li>
+                                <a href="">Contact Us</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- Footer account menu -->
+                <div class="col-lg-2 col-md-3 col-sm-5">
+                    <div class="footer-widget">
+                        <h6>Account</h6>
+                        <ul>
+                            {% if request.user.is_authenticated %}
+                            <li>
+                                <a href="{% url 'profile' %}">My Account</a>
+                            </li>
+                            <li>
+                                <a href="{% url 'view_bag' %}">My Bag</a>
+                            </li>
+                            <li>
+                                <a href="{% url 'account_logout' %}">Logout</a>
+                            </li>
+                            {% else %}
+                            <li>
+                                <a href="{% url 'account_signup' %}">Register</a>
+                            </li>
+                            <li>
+                                <a href="{% url 'account_login' %}">Login</a>
+                            </li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                </div>
+                <!-- Newsletter div -->
+                <div class="col-lg-4 col-md-8 col-sm-8">
+                    <div id="mc_embed_signup" class="footer-newsletter">
+                        <h6>Newsletter</h6>
+                        <form
+                            action="https://herokuapp.us11.list-manage.com/subscribe/post?u=62bd93b1e49d86b1989c2e9da&amp;id=785dbc5b60"
+                            method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form"
+                            class="validate" target="_blank" novalidate>
+                            <input type="email" value="" name="EMAIL" class="required email" id="mce-EMAIL"
+                                placeholder="Email" aria-label="newsletter signup">
+                            <button type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe"
+                                class="site-btn">Subscribe</button>
+                            <div id="mce-responses" class="clear foot">
+                                <div class="response text-black" id="mce-error-response" style="display:none"></div>
+                                <div class="response text-black" id="mce-success-response" style="display:none"></div>
+                            </div>
+                            <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+                            <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text"
+                                   name="b_62bd93b1e49d86b1989c2e9da_785dbc5b60" tabindex="-1" value=""></div>
+                        </form>
+                    </div>
+                    <!-- Footer socials -->
+                    <div class="footer-social">
+                        <a href="https://www.facebook.com/Watch-You-Want-103162945806977"
+                            aria-label="Go to our Facebook page (opens in new tab)" rel="noopener" target="_blank">
+                            <i class="fa-brands fa-facebook"></i>
+                        </a>
+                        <a href="https://www.instagram.com/"
+                            aria-label="Go to Intagram (opens in new tab)" rel="noopener" target="_blank">
+                            <i class="fa-brands fa-instagram"></i>
+                        </a>
+                        <a href="https://twitter.com/" aria-label="Go to Twitter (opens in new tab)" rel="noopener" target="_blank">
+                            <i class="fa-brands fa-twitter"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/" aria-label="Go to LinkedIn (opens in new tab)" rel="noopener" target="_blank">
+                            <i class="fa-brands fa-linkedin"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Footer copyright -->
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="footer-copyright-text">
+                    <p>Copyright<span>&amp;</span>
+                        <script>
+                            document.write(new Date().getFullYear());
+                        </script>
+                        All rights reserved. | This website was made by Katherine Biggs.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    {% block postloadjs %}
+    <!-- initializes toasts -->
+    <script>
+        $('.toast').toast('show');
+    </script>
+    <script src='//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js'></script>
+    <script>
+        (function ($) {
+            window.fnames = new Array();
+            window.ftypes = new Array();
+            fnames[0] = 'EMAIL';
+            ftypes[0] = 'email';
+            fnames[1] = 'FNAME';
+            ftypes[1] = 'text';
+            fnames[2] = 'LNAME';
+            ftypes[2] = 'text';
+            fnames[3] = 'ADDRESS';
+            ftypes[3] = 'address';
+            fnames[4] = 'PHONE';
+            ftypes[4] = 'phone';
+            fnames[5] = 'BIRTHDAY';
+            ftypes[5] = 'birthday';
+        }(jQuery));
+        var $mcj = jQuery.noConflict(true);
+    </script>
+    {% endblock %}
 </body>
-{% block body %} {% endblock %}
+
+</html>

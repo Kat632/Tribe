@@ -1,0 +1,103 @@
+html {
+    height: 100%;
+}
+
+body {
+    height: calc(100vh - 164px);
+    color: #000;
+    font-family: 'Poppins', sans-serif; 
+}
+
+h1,h2,h3,h4,h5,h6 {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 900;
+    letter-spacing: 0;
+}
+
+a {
+    color: #00ece2;
+    text-decoration: none;
+}
+
+/* header */
+
+#topnav {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.main-logo-link {
+    width: fit-content;
+}
+
+.search-form form {
+    position: relative;
+    margin-bottom: 5px;
+}
+
+.search-form form button {
+    position: absolute;
+    right: 4px;
+    top: 4px;
+}
+
+.search-form form input {
+    height: 55px;
+    width: 100%;
+    border: 1px solid #e1e1e1;
+    padding-left: 30px;
+    font-size: 14px;
+    color: #666;
+}
+
+.header-menu ul li {
+    margin-right: 20px;
+    list-style: none;
+    display: inline-block;
+    position: relative;
+}
+
+.header-menu ul li a {
+    font-size: 15px;
+    text-transform: uppercase;
+    color: #111;
+    font-weight: 500;
+    padding: 2px 0;
+    cursor: pointer;
+}
+
+.right-list {
+    display: inline-block;
+    margin-right: 25px;
+    text-align: right;
+    padding: 30px 0 27px;
+}
+
+.header-right-widgets li {
+    list-style: none;
+    font-size: 18px;
+    color: #111;
+    cursor: pointer;
+}
+
+.header-logo {
+    padding: 26px 0;
+}
+
+a.bag-info {
+    color: #111;
+}
+
+a.bag-info:focus,
+a.bag-info:hover {
+    color: #5247d4;
+}
+
+/* from Bulma */
+.icon {
+    align-items: center;
+    display: inline-flex;
+    justify-content: center;
+    height: 1.5rem;
+    width: 1.5rem;
+}
