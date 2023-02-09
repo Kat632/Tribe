@@ -39,10 +39,14 @@
     {% block extra_css %}
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
-        integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <!-- Mailchimp -->
-    <link href="//cdn-images.mailchimp.com/embedcode/classic-10_7_dtp.css" rel="stylesheet" type="text/css">
+        integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YApadding: 16px 24px;
+        border-style: solid;
+        border-width: 2px;
+        border-color: #0d0f13;
+        border-radius: 300px;
+        background-color: transparent;
+        color: #0d0f13;
+        font-size: 18px;ssic-10_7_dtp.css" rel="stylesheet" type="text/css">
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -69,10 +73,10 @@
     {% block extra_js %}
     {% endblock %}
 
-    <title>Watch You Want? {% block extra_title %}{% endblock %}</title>
+    <title>Malvern Hill Tribe {% block extra_title %}{% endblock %}</title>
 </head>
 
-<body>
+<body class="background">
     <!-- Header content -->
     <header class="container-fluid fixed-top">
         <div id="topnav" class="row bg-white pt-lg-0 d-none d-lg-flex">
@@ -80,7 +84,7 @@
                 <!-- Main logo -->
                 <div class="header-logo">
                     <a href="{% url 'home' %}" class="nav-link main-logo-link">
-                        <img src="{% static 'media/watchyouwant_logo_new.png' %}" alt="Watch You Want logo"
+                        <img src="{% static 'media/watchyouwant_logo_new.png' %}" alt="Malvern Hill Tribe Logo"
                             style="height:115px;">
                     </a>
                 </div>
@@ -157,7 +161,7 @@
         </div>
         <!-- Delivery banner -->
         <div id="delivery-banner" class="row text-center">
-            <div class="col bg-black text-white">
+            <div class="col bg-white text-black">
                 <h4 class="logo-font my-1">Free delivery on orders over £{{ free_delivery_threshold }}!</h4>
             </div>
         </div>
