@@ -2,14 +2,13 @@ html {
     height: 100%;
 }
 
-/*body {
- 
-}*/
+body {
+  height: calc(100vh - 164px);
+  font-family: 'Poppins', sans-serif;
+  height: 100vh;
+}
 
 .background {
-    height: calc(100vh - 164px);
-    font-family: 'Poppins', sans-serif;
-    height: 100vh;
     width: 100%;
     background: linear-gradient(to right, #f12711, #f5af19);
     background-size: 400% 400%;
@@ -148,6 +147,16 @@ a.bag-info:hover {
     width: 1.5rem;
 }
 
+.hero-box {
+  padding: 0;
+  display: flex;
+  position:relative;
+  padding-top: 262px;
+  height: 638px;
+  justify-content: center;
+  align-items: center;
+}
+
 .heading-1 {
     color: #0d0f13;
     font-size: 5vw;
@@ -155,9 +164,23 @@ a.bag-info:hover {
     font-weight: 600;
     text-align: center;
     letter-spacing: -0.05em;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    width: 70%;
+}
+
+.sub-head {
+  max-width: 430px;
+  padding-top: 24px;
+  padding-bottom: 32px;
+  font-family: Campton, sans-serif;
+  font-size: 24px;
+  line-height: 110%;
+  font-weight: 500;
 }
 
 .header-button {
+    position: absolute;
     padding: 16px 24px;
     border-style: solid;
     border-width: 2px;
