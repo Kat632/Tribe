@@ -20,7 +20,7 @@ def home(request):
         'forums': forums,
         'count': count,
         'discussions': discussions}
-    return render(request, 'home.html', context)
+    return render(request, 'forumHome.html', context)
 
 
 """
