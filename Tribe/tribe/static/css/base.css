@@ -157,7 +157,7 @@ a.bag-info:hover {
   padding-top: calc(5rem + 104px);
   padding-bottom: 6rem;
   position: relative;
-  z-index: 1;
+  z-index: 1;  border-top-color: red;
 }
 
 .hero-box {
@@ -215,6 +215,7 @@ a.bag-info:hover {
   border-color: #0d0f13;
 }
 
+/* Who We Are & Image Section */
 .section-box {
   background-color:#0d0f13;
 }
@@ -246,3 +247,19 @@ a.bag-info:hover {
 .gradient {
   line-height: 118%;
 }
+
+/* What We Do */
+.section-box-2 {
+  padding-top: 72px;
+  padding-bottom: 72px;
+}
+
+.subhead-2 {
+    padding-top: 24px;
+    padding-bottom: 14px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 24px;
+    line-height: 110%;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+  }
