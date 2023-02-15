@@ -242,6 +242,7 @@ a.bag-info:hover {
   line-height: 100%;
   font-weight: 600;
   letter-spacing: -0.05em;
+  padding-bottom: 50px;
 }
 
 .gradient {
@@ -263,3 +264,16 @@ a.bag-info:hover {
     font-weight: 500;
     letter-spacing: -0.02em;
   }
+
+.img-col {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.body-copy {
+  padding-top: 16px;
+  color: #0d0f13;
+  font-size: 18px;
+  line-height: 110%;
+  font-weight: 500;
+}
